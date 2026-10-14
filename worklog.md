@@ -213,3 +213,17 @@ Work Log:
 
 Stage Summary:
 - Shop unlocked with the real owner-supplied catalog, POA-only pricing, and the full contact layer. Branch pushed for preview; production untouched pending owner approval.
+
+---
+Task ID: 4
+Agent: main (Super Z)
+Task: Rename repo to tangison/weca-offroad (owner instruction 2026-10-14). Keep the site on its existing Vercel project, update in place, no migration.
+
+Work Log:
+- Renamed GitHub repo weca-off-road-centre -> weca-offroad via API (admin PAT). GitHub 301s the old URL; existing clones and git remotes keep working via redirect.
+- Verified deploy pipeline is rename-safe before renaming: .github/workflows (ci.yml, deploy.yml) contain no hardcoded repo names (deploy uses VERCEL_ORG_ID / VERCEL_PROJECT_ID secrets), no vercel.json, no required env vars (only optional NEXT_PUBLIC_GSC_TOKEN), and the Vercel GitHub App tracks the repo by ID so auto-deploy follows the rename.
+- Updated README clone URL to the new repo name; dated historical rows in PROOF.md left untouched (audit log).
+- Updated local clone remote and pushed this commit to feat/shop-catalog-and-contact-widgets to trigger a fresh preview and confirm the integration followed the rename.
+
+Stage Summary:
+- Repo is now tangison/weca-offroad; PR #7 intact (head 671951a -> new sha). Site still served by the same Vercel project at wecaoffroad.com. Nothing migrated; production content unchanged pending owner approval of PR #7.
