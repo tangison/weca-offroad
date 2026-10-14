@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { ArrowUp } from 'lucide-react';
 
 /**
@@ -59,6 +60,13 @@ import { ArrowUp } from 'lucide-react';
  */
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+  // On /shop routes the persistent ShopActionBar owns the bottom edge, so
+  // the button lifts above it instead of stacking on top of the bar.
+  const onShop = Boolean(pathname?.startsWith('/shop'));
+  const positionClass = onShop
+    ? 'bottom-[4.75rem] md:bottom-[4.5rem]'
+    : 'bottom-6 md:bottom-8';
 
   useEffect(() => {
     let threshold = typeof window !== 'undefined' ? window.innerHeight : 600;
@@ -111,7 +119,7 @@ export function ScrollToTop() {
           // above page content. The header is fixed at top, the scroll-to-top
           // is fixed at bottom - they never overlap visually, but z-40 keeps
           // the stacking order logical (header > scroll-to-top > content).
-          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 inline-flex items-center justify-center h-11 w-11 md:h-12 md:w-12 bg-[#E67E22] hover:bg-[#F39C12] text-[#0D0D0D] shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]"
+          className={`fixed ${positionClass} right-6 md:right-8 z-40 inline-flex items-center justify-center h-11 w-11 md:h-12 md:w-12 bg-[#E67E22] hover:bg-[#F39C12] text-[#0D0D0D] shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]`}
         >
           <ArrowUp className="w-5 h-5" aria-hidden="true" />
         </motion.button>
