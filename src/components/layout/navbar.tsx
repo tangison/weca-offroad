@@ -9,6 +9,7 @@ import { Menu, X, ChevronDown, ArrowRight, Phone, MessageCircle, Mail, Search } 
 import { businessInfo, shopCategories } from '@/lib/data';
 import { SearchDialog } from '@/components/ui/search-dialog';
 import { ConstructionBanner } from '@/components/layout/construction-banner';
+import { StickyContactBar } from '@/components/layout/sticky-contact-bar';
 import { siteConfig } from '@/lib/config';
 
 // TikTok Icon
@@ -147,15 +148,16 @@ export function Navbar() {
 
   // Desktop dropdown vertical offset. The dropdowns are position:fixed
   // relative to the viewport, so their `top` must account for the full
-  // header height (banner + nav row). The construction banner adds ~30px
-  // and renders on /shop routes only (client instruction 2026-09-12);
-  // the offset is computed per route from the pathname so dropdowns sit
-  // correctly with the banner on shop pages and without it everywhere
-  // else. Flipping the underConstruction flag off removes both the
-  // banner and the extra offset in one edit.
+  // header height. The StickyContactBar (Call + WhatsApp, added 2026-10-14)
+  // slides in under the nav row once the visitor scrolls, adding ~38px;
+  // the construction banner (shop-only, currently disabled) adds ~30px.
+  // The offset is computed per route AND scroll state so dropdowns sit
+  // correctly in every combination.
   const bannerVisible =
     siteConfig.features.underConstruction && Boolean(pathname?.startsWith('/shop'));
-  const dropdownTop = bannerVisible ? 'top-[98px]' : 'top-[68px]';
+  const dropdownTop = bannerVisible
+    ? (isScrolled ? 'top-[136px]' : 'top-[98px]')
+    : (isScrolled ? 'top-[106px]' : 'top-[68px]');
 
   return (
     <>
@@ -197,9 +199,37 @@ export function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
-                // Shop is rendered as a plain link while the catalog is
-                // in "Coming Soon" state. When real products land, swap
-                // this back to the dropdown above using siteConfig.features.
+                // Shop is a hover dropdown again: the real catalog is live
+                // (2026-10-14), restoring the mega-menu per the repo note.
+                if (link.label === 'Shop') {
+                  return (
+                    <div
+                      key={link.href}
+                      className="relative"
+                      ref={dropdownRef}
+                      onMouseEnter={handleShopMouseEnter}
+                      onMouseLeave={handleShopMouseLeave}
+                    >
+                      <button
+                        onClick={() => setIsShopDropdownOpen(!isShopDropdownOpen)}
+                        className={`flex items-center gap-1 px-4 py-2 text-xs font-accent uppercase tracking-wider transition-colors ${
+                          pathname.startsWith('/shop')
+                            ? 'text-[#E67E22]'
+                            : 'text-[#F5F5F5] hover:text-[#E67E22]'
+                        }`}
+                        aria-expanded={isShopDropdownOpen}
+                        aria-haspopup="true"
+                      >
+                        Shop
+                        <ChevronDown
+                          className={`w-3 h-3 transition-transform duration-150 ${
+                            isShopDropdownOpen ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  );
+                }
                 return (
                   <Link
                     key={link.href}
@@ -290,6 +320,11 @@ export function Navbar() {
           </div>
         </nav>
         </div>
+
+        {/* Sticky contact bar (Call + WhatsApp) - slides in below the nav
+            row once the visitor scrolls and stays visible for the rest of
+            the visit, desktop and mobile (owner request 2026-10-14). */}
+        <StickyContactBar visible={isScrolled} />
       </header>
 
       {/* Desktop Shop Dropdown */}

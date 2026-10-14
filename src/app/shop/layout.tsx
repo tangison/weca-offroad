@@ -4,10 +4,12 @@ import { BreadcrumbStructuredData } from '@/components/ui/structured-data';
 
 export const metadata: Metadata = {
   title: 'Shop 4x4 Accessories | Weca Offroad Namibia',
-  description: 'Catalog coming soon. Weca Offroad Centre in Swakopmund carries 4x4 accessories from Wildog, Dometic, Tentco, Tough Dog, EcoFlow and more. Message us on WhatsApp for a quote on rooftop tents, suspension, canopies, recovery gear and power.',
+  description:
+    'Rooftop tents, suspension, bumpers, canopies, awnings, seat covers, winches, fridges and power from the brands Namibia trusts. Every price POA: quote via WhatsApp.',
   openGraph: {
     title: 'Shop 4x4 Accessories | Weca Offroad Namibia',
-    description: 'Catalog coming soon. Message us on WhatsApp for a quote on 4x4 accessories - rooftop tents, suspension, canopies, recovery gear, power and more.',
+    description:
+      'Browse the real Weca Offroad catalog. Every price POA: pick what you need and request an instant quote on WhatsApp.',
   },
   alternates: {
     canonical: '/shop',

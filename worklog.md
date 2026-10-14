@@ -195,3 +195,21 @@ Work Log:
 
 Stage Summary:
 - All user-reported issues fixed at source; ready to commit + push to origin/main (Vercel auto-deploys wecaoffroad.com).
+
+---
+Task ID: 3
+Agent: main (Super Z)
+Task: Unlock the shop page (owner instruction 2026-10-14): real catalog, POA everywhere, shop + quote widgets, THE BAR, sticky header contact bar, call + WhatsApp site-wide. Branch feat/shop-catalog-and-contact-widgets, nothing to production until owner approves.
+
+Work Log:
+- Cloned tangison/weca-offroad-centre, audited the lock: empty /shop page, underConstruction flag, ShopOnly footer disclaimer, home Coming Soon section, demoted desktop Shop dropdown.
+- Built the owner-approved catalog: 57 products ONLY from the handwritten SA supplier list + the 20 client-confirmed brands + their documented house brands. EVERY price POA. Excluded Alu-Cab/National Luna/SnoMaster/Maxxis/Ironman and any brand not on the owner's list.
+- Images: 15 dealer-sourced photos converted to 800px webp (sources recorded in PROOF.md) + 30 brand tiles generated with sharp. 57/57 image paths verified on disk.
+- Restored the tested shop grid from commit d6e3e50 per the repo's own instructions; adapted: POA rendering, price sorts removed, no stock claims, QuoteWidget + ShopActionBar mounted, sidebar shows non-empty categories.
+- New components: shop-widget (home teaser), quote-widget (WhatsApp deep-link quote form, used on Home + /shop), shop-action-bar (THE BAR on /shop), sticky-contact-bar (header strip on scroll), floating-contact (site-wide FABs, hidden on /shop).
+- Navbar: desktop Shop mega-menu re-wired per repo note; dropdown offsets scroll-aware. Footer: ShopOnly disclaimer removed. config: underConstruction false. scroll-to-top: shop offset.
+- Tests: data.test.ts now asserts 50+ real products, every price === 'POA', every brand in the owner-approved allowlist.
+- Gates: typecheck 0, lint 0, tests 50/50, build 19/19 routes; agent-browser QA desktop 1366 + iPhone 14 (11 screenshots), console clean except 1 pre-existing DialogContent warning.
+
+Stage Summary:
+- Shop unlocked with the real owner-supplied catalog, POA-only pricing, and the full contact layer. Branch pushed for preview; production untouched pending owner approval.
