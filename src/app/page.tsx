@@ -9,6 +9,8 @@ import { HeroSlideshow } from '@/components/ui/hero-slideshow';
 import { ArrowRight, MapPin, Award, Wrench, Truck } from 'lucide-react';
 import { BrandLogoCarousel } from '@/components/ui/brand-logo-carousel';
 import { GoogleReviewsEmbed } from '@/components/ui/google-reviews-embed';
+import { ShopWidget } from '@/components/shop/shop-widget';
+import { QuoteWidget } from '@/components/shop/quote-widget';
 import { services, galleryItems, businessInfo, heroSlides } from '@/lib/data';
 
 export default function HomePage() {
@@ -69,48 +71,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Catalog coming soon - replaces the previous "Featured Products"
-          section which rendered fabricated products from the frozen
-          products array. Per client instruction (2026-08-06): fake
-          products must not appear anywhere on the live site, including
-          the homepage. This teaser matches the /shop empty state and
-          routes visitors to WhatsApp or /services instead of showing
-          product cards. */}
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <h2 className="font-heading text-3xl md:text-4xl text-[#F5F5F5] tracking-tight mb-3">
-            Catalog Coming Soon
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 font-body">
-            We are loading our full product range now. In the meantime,
-            message us on WhatsApp with what you need and we will quote
-            you on the spot.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              asChild
-              className="bg-[#E67E22] hover:bg-[#F39C12] text-[#0D0D0D] font-accent font-semibold uppercase tracking-wider"
-            >
-              <a
-                href={`https://wa.me/${businessInfo.whatsapp.replace(/\D/g, '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp Us
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-[#2A2A2A] text-[#F5F5F5] hover:border-[#E67E22] font-accent uppercase tracking-wider"
-            >
-              <Link href="/services">
-                View Our Services <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Shop widget - the real catalog is live (2026-10-14). Replaces the
+          previous "Catalog Coming Soon" teaser. Four featured products from
+          the owner-approved catalog plus category shortcuts into /shop. */}
+      <ShopWidget />
 
       {/* Services - Minimal */}
       <section className="py-16 md:py-20 bg-[#1A1A1A]">
@@ -290,6 +254,10 @@ export default function HomePage() {
           <GoogleReviewsEmbed />
         </div>
       </section>
+
+      {/* Quote widget - POA quote request, WhatsApp deep link (owner
+          request 2026-10-14: shop + quote widgets on Home). */}
+      <QuoteWidget />
 
       {/* CTA Section - Minimal */}
       <section className="py-16 md:py-20 bg-[#E67E22]">

@@ -75,8 +75,8 @@ public/
 
 ```bash
 # Clone the repository
-git clone https://github.com/tangison/weca-offroad-centre.git
-cd weca-offroad-centre
+git clone https://github.com/tangison/weca-offroad.git
+cd weca-offroad
 
 # Copy environment template
 cp .env.example .env

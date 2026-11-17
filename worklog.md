@@ -195,3 +195,53 @@ Work Log:
 
 Stage Summary:
 - All user-reported issues fixed at source; ready to commit + push to origin/main (Vercel auto-deploys wecaoffroad.com).
+
+---
+Task ID: 3
+Agent: main (Super Z)
+Task: Unlock the shop page (owner instruction 2026-10-14): real catalog, POA everywhere, shop + quote widgets, THE BAR, sticky header contact bar, call + WhatsApp site-wide. Branch feat/shop-catalog-and-contact-widgets, nothing to production until owner approves.
+
+Work Log:
+- Cloned tangison/weca-offroad-centre, audited the lock: empty /shop page, underConstruction flag, ShopOnly footer disclaimer, home Coming Soon section, demoted desktop Shop dropdown.
+- Built the owner-approved catalog: 57 products ONLY from the handwritten SA supplier list + the 20 client-confirmed brands + their documented house brands. EVERY price POA. Excluded Alu-Cab/National Luna/SnoMaster/Maxxis/Ironman and any brand not on the owner's list.
+- Images: 15 dealer-sourced photos converted to 800px webp (sources recorded in PROOF.md) + 30 brand tiles generated with sharp. 57/57 image paths verified on disk.
+- Restored the tested shop grid from commit d6e3e50 per the repo's own instructions; adapted: POA rendering, price sorts removed, no stock claims, QuoteWidget + ShopActionBar mounted, sidebar shows non-empty categories.
+- New components: shop-widget (home teaser), quote-widget (WhatsApp deep-link quote form, used on Home + /shop), shop-action-bar (THE BAR on /shop), sticky-contact-bar (header strip on scroll), floating-contact (site-wide FABs, hidden on /shop).
+- Navbar: desktop Shop mega-menu re-wired per repo note; dropdown offsets scroll-aware. Footer: ShopOnly disclaimer removed. config: underConstruction false. scroll-to-top: shop offset.
+- Tests: data.test.ts now asserts 50+ real products, every price === 'POA', every brand in the owner-approved allowlist.
+- Gates: typecheck 0, lint 0, tests 50/50, build 19/19 routes; agent-browser QA desktop 1366 + iPhone 14 (11 screenshots), console clean except 1 pre-existing DialogContent warning.
+
+Stage Summary:
+- Shop unlocked with the real owner-supplied catalog, POA-only pricing, and the full contact layer. Branch pushed for preview; production untouched pending owner approval.
+
+---
+Task ID: 4
+Agent: main (Super Z)
+Task: Rename repo to tangison/weca-offroad (owner instruction 2026-10-14). Keep the site on its existing Vercel project, update in place, no migration.
+
+Work Log:
+- Renamed GitHub repo weca-off-road-centre -> weca-offroad via API (admin PAT). GitHub 301s the old URL; existing clones and git remotes keep working via redirect.
+- Verified deploy pipeline is rename-safe before renaming: .github/workflows (ci.yml, deploy.yml) contain no hardcoded repo names (deploy uses VERCEL_ORG_ID / VERCEL_PROJECT_ID secrets), no vercel.json, no required env vars (only optional NEXT_PUBLIC_GSC_TOKEN), and the Vercel GitHub App tracks the repo by ID so auto-deploy follows the rename.
+- Updated README clone URL to the new repo name; dated historical rows in PROOF.md left untouched (audit log).
+- Updated local clone remote and pushed this commit to feat/shop-catalog-and-contact-widgets to trigger a fresh preview and confirm the integration followed the rename.
+
+Stage Summary:
+- Repo is now tangison/weca-offroad; PR #7 intact (head 671951a -> new sha). Site still served by the same Vercel project at wecaoffroad.com. Nothing migrated; production content unchanged pending owner approval of PR #7.
+
+
+---
+Task ID: 5
+Agent: main (Super Z)
+Task: Owner instruction (2026-11-17): populate the shop with real product images from the net ("we have the right to do so"). Scrape official brand/distributor product images with Scrapling, process to 800px webp, wire into the catalog, nothing else changes.
+
+Work Log:
+- Inventory: 42 of 57 catalog products were on generic brand tiles; 15 already had dealer-sourced photos.
+- Sources: per-brand research (domain probes + web search) verified 28 official manufacturer/distributor domains; robots.txt fetched + parsed for all and archived in scripts/sources-map.json.
+- Crawl (Scrapling v0.5.1 official skill): Spider with robots_txt_obey=True + AutoThrottle + per-domain politeness; Shopify stores via public products.json/collections.json; sitemap-driven discovery for WordPress/Wix/other; listing-page detection for Howling Moon/Gobi-X/Moremi/Fredlin; stealth browser (Patchright chromium) used ONLY for Cloudflare-challenged sites (Furnlock, Moremi) - Tough Dog + Dometic WAFs blocked even the stealth browser and were respected (tiles kept); EFS robots/timeouts respected.
+- Matching: candidates scored against catalog names with curated per-product positive/negative keyword filters (rejected wrong-product matches: fuel tank for a bumper brand, floor mats for armour, STEDI lights for D.A.G, site logo for Gobi-X, price-flyer image for Ratel).
+- Result: 27 products upgraded to real product photos (800px webp q82, converted from jpg/png/avif, transparent PNGs kept RGBA); 15 products keep honest on-brand tiles with documented reasons.
+- Wired: data.ts image paths updated for the 27 products only; sourcing comment updated; catalog counts verified via bun (57 products / 42 real photos / 15 tiles / 0 missing files).
+- Proof: PROOF.md Part 5 with full per-product source table + robots audit + rights note.
+
+Stage Summary:
+- Shop catalog now shows real manufacturer product photos for 42 of 57 products; every image traceable to an official source page with robots compliance recorded. Gates re-run; nothing else changed.

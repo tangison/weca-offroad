@@ -10,12 +10,39 @@ import { siteConfig } from "@/lib/config";
  */
 
 describe("products", () => {
+  // Real catalog policy (owner, 2026-10-14): products come ONLY from the
+  // owner's handwritten SA supplier list + the client-confirmed brand list.
+  // Every price is POA. No fabricated SKUs, no estimated prices.
+  const ALLOWED_BRANDS = new Set([
+    // Client-confirmed site brands (src/lib/config.ts)
+    "Wildog", "GOBI X", "Gobi-X", "Ratel", "Dometic", "Tentco", "Howling Moon",
+    "Fox", "Tough Dog", "EFS", "EcoFlow", "Runva", "WARN", "Moremi", "AluBlack",
+    "Fredlin Hoists", "DeGraaf Exhausts", "Tougher", "Beesdam", "Escape Gear", "Rockford",
+    // Owner handwritten SA supplier list (IMG_7143) + their house brands
+    "Rhinoman", "Onca Offroad", "MCC", "Piak", "Lightforce", "Profender",
+    "AmadaXtreme", "D.A.G", "Flated", "Front Runner", "Induna 4x4",
+    "Furnlock & Slide", "Eezi Slide", "The 4x4 Store", "MAXE",
+    "Africa Longhorn", "Quick Pitch", "Summit 4x4",
+  ]);
+
   it("has at least one product", () => {
     expect(products.length).toBeGreaterThan(0);
   });
 
-  it("has at least 200 products (full catalog)", () => {
-    expect(products.length).toBeGreaterThanOrEqual(200);
+  it("has the full owner-approved catalog (50+ products)", () => {
+    expect(products.length).toBeGreaterThanOrEqual(50);
+  });
+
+  it("every product is POA (Price on Request)", () => {
+    for (const p of products) {
+      expect(p.price).toBe("POA");
+    }
+  });
+
+  it("every product brand is on the owner-approved brand list", () => {
+    for (const p of products) {
+      expect(ALLOWED_BRANDS.has(p.brand)).toBe(true);
+    }
   });
 
   it("each product has required fields", () => {

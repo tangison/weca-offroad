@@ -200,15 +200,12 @@ export const siteConfig = {
     enableSearch: true,
     enableWhatsAppRedirect: true,
     enableProductModal: true,
-    // "Under construction" notice for the SHOP PAGE ONLY (client
-    // instruction, 2026-09-12). When true, a slim non-dismissible strip
-    // renders at the top of the header and a matching footer disclaimer
-    // renders on /shop routes (see construction-banner.tsx and
-    // shop-only.tsx) because the product catalog is the single unfinished
-    // part of the site. Every other page ships production-ready with zero
-    // construction messaging. Flip to false and rebuild to remove the
-    // notice cleanly - no markup to delete across files.
-    underConstruction: true,
+    // "Under construction" notice for the SHOP PAGE ONLY. Was true while
+    // the catalog was pending the client's real stock data. The catalog is
+    // now LIVE with the owner-approved product list (2026-10-14), so the
+    // notice is switched off. Flip to true to bring the shop banner and
+    // footer disclaimer back in one edit.
+    underConstruction: false,
   },
 } as const;
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { FloatingContact } from "@/components/layout/floating-contact";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { LocalBusinessStructuredData, WebsiteStructuredData } from "@/components/ui/structured-data";
@@ -141,6 +142,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <ScrollToTop />
+        <FloatingContact />
         <Toaster />
         <CookieConsent />
         <Analytics />
