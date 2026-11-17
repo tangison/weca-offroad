@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { services, galleryItems, brands } from "@/lib/data";
+import { services, galleryItems, brands, products } from "@/lib/data";
 
 /**
  * GET /api
@@ -15,10 +15,8 @@ import { services, galleryItems, brands } from "@/lib/data";
  * contact details, business info, or anything that could be used for
  * spam harvesting. Use the contact page for that.
  *
- * NOTE: Products are intentionally excluded (2026-08-06). The fabricated
- * catalog has been removed from the live site; the /shop page shows a
- * "Catalog coming soon" empty state. When the real SKU-level catalog
- * arrives, re-add `products` to the import and the counts object.
+ * The real catalog is live (2026-10-14): `products` is counted again per
+ * the original instruction to re-add it once the real catalog arrived.
  */
 export async function GET() {
   return NextResponse.json(
@@ -26,8 +24,9 @@ export async function GET() {
       site: "Weca Offroad Centre",
       locale: "en_NA",
       location: "Swakopmund, Namibia",
-      catalogStatus: "coming_soon",
+      catalogStatus: "live",
       counts: {
+        products: products.length,
         services: services.length,
         galleryItems: galleryItems.length,
         brands: brands.length,
