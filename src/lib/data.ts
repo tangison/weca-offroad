@@ -78,10 +78,10 @@ export const productCategories = [
 // REPLACEMENT PRODUCTS ARRAY for src/lib/data.ts
 // Source: owner-supplied SA supplier list (IMG_7143) + owner-approved supplier
 // research blueprint + the 20 client-confirmed site brands in src/lib/config.ts.
-// Pricing policy (owner instruction): every product is POA. No price may be
-// estimated, guessed or generated. Product photos are dealer-sourced reference
-// images recorded in the workspace imgsearch log; cards without a matched
-// photo use an on-brand tile.
+// Images: real product photos sourced from the official manufacturer/distributor sites of each
+// brand (Scrapling crawl, robots.txt-obeying, sources + robots audit recorded in PROOF.md,
+// 2026-11-17). Cards from brands whose sites are unavailable (WAF/robots/offline) use an
+// on-brand tile.
 export const products: Product[] = [
   {
     id: 'tentco-rooftop-tents',
@@ -113,7 +113,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Deluxe steps the Tourer up with more interior height and comfort detail for longer trips. Ask us for the current model lineup and a quote that includes fitment on your bakkie or 4x4.',
     features: ['Extra interior headroom', 'Comfort touring layout', 'Closing strip and flysheet detail', 'Quoted per application'],
-    image: '/images/products/tiles/tile-howling-moon.webp',
+    image: '/images/products/howling-moon-deluxe-rtt.webp',
     inStock: true,
   },
   {
@@ -124,7 +124,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Stargazer carries a clear view panel over the sleeping area, so you fall asleep under the Namib sky with real weather protection above you. One of the most requested tents in the Howling Moon lineup.',
     features: ['View panel over the sleeping area', 'Canvas build for desert conditions', 'Sleeps two adults', 'Quoted with fitment included'],
-    image: '/images/products/tiles/tile-howling-moon.webp',
+    image: '/images/products/howling-moon-stargazer-rtt.webp',
     inStock: true,
   },
   {
@@ -157,7 +157,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'D.A.G rooftop tents from 4x4 Wholesalers Africa give a value-focused entry into roof-top camping without cutting corners on canvas or the frame. Quoted per vehicle with fitment at our workshop.',
     features: ['Value-focused canvas tent', 'Steel base frame', 'Ladder and flysheet included', 'Quoted per application'],
-    image: '/images/products/tiles/tile-d-a-g.webp',
+    image: '/images/products/dag-rooftop-tent.webp',
     inStock: true,
   },
   {
@@ -168,7 +168,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'A canvas side awning from Howling Moon that rolls out in seconds and gives you shade wherever you stop. Bracketed to your roof rack or canopy rails and quoted with fitment included.',
     features: ['Quick roll-out canvas shade', 'Fits roof racks and canopy rails', 'Free-standing legs included', 'Swakopmund fitment available'],
-    image: '/images/products/tiles/tile-howling-moon.webp',
+    image: '/images/products/howling-moon-awning.webp',
     inStock: true,
   },
   {
@@ -179,7 +179,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Quick Pitch 270 wraps around the back of your vehicle for full camp-side cover and stands on its own poles once deployed. Ask us which version suits your roof rack and we will quote it fitted.',
     features: ['270 degree wrap-around cover', 'Freestanding pole setup', 'Hinged aluminium arms', 'Quoted with fitment included'],
-    image: '/images/products/tiles/tile-quick-pitch.webp',
+    image: '/images/products/quickpitch-270-awning.webp',
     inStock: true,
   },
   {
@@ -190,7 +190,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'A 270 degree awning from the D.A.G camping line via 4x4 Wholesalers Africa: maximum shade for family camps at a sharp price point. Quoted per vehicle and fitted at Weca.',
     features: ['270 degree coverage', 'Freestanding setup', 'Heavy-duty canvas', 'Value-focused pricing'],
-    image: '/images/products/tiles/tile-d-a-g.webp',
+    image: '/images/products/dag-270-awning.webp',
     inStock: true,
   },
   {
@@ -212,7 +212,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Xpedition adds overlanding detail to the Rhinoman aluminium canopy line: roof rack ready, dust-sealed and sized to your load bin. Quoted color-coded per vehicle with fitment at our workshop.',
     features: ['Aluminium canopy for touring', 'Roof rail ready', 'Dust-sealed doors', 'Quoted color-coded per vehicle'],
-    image: '/images/products/tiles/tile-rhinoman.webp',
+    image: '/images/products/rhinoman-xpedition-canopy.webp',
     inStock: true,
   },
   {
@@ -223,7 +223,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The LX is the workhorse spec in the Rhinoman range: a clean, strong aluminium canopy for tools, camping gear and daily abuse. Available for the common bakkie models in Namibia.',
     features: ['Aluminium canopy, workhorse spec', 'Central locking option', 'Fits most double cabs', 'Quoted per application'],
-    image: '/images/products/tiles/tile-rhinoman.webp',
+    image: '/images/products/rhinoman-lx-canopy.webp',
     inStock: true,
   },
   {
@@ -234,7 +234,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The LT is the light, entry spec in the Rhinoman aluminium line for load protection on a budget. Talk to us about the current LT spec for your bakkie and we will send a quote with fitment.',
     features: ['Lightweight aluminium build', 'Entry canopy spec', 'Load-bin protection', 'Quoted per application'],
-    image: '/images/products/tiles/tile-rhinoman.webp',
+    image: '/images/products/rhinoman-lt-canopy.webp',
     inStock: true,
   },
   {
@@ -289,7 +289,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Induna builds the roof console that Land Cruiser 70 Series owners keep asking for: switch panels, storage and a clean fit above the windshield. Quoted for your specific 70 Series model.',
     features: ['Made for LC70 Series cabins', 'Switch panel provision', 'Overhead storage', 'Quoted per model'],
-    image: '/images/products/tiles/tile-induna-4x4.webp',
+    image: '/images/products/induna-lc70-console.webp',
     inStock: true,
   },
   {
@@ -300,7 +300,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Furnlock and Slide build the heavy-duty drawer runners and fridge slides that survive corrugations and load. Tell us your fridge model and load bin and we will quote the right slide setup.',
     features: ['Heavy-duty locking runners', 'Fridge slide kits', 'Survives rough corrugated roads', 'Quoted to your fridge and bin'],
-    image: '/images/products/tiles/tile-furnlock-slide.webp',
+    image: '/images/products/furnlock-fridge-slide.webp',
     inStock: true,
   },
   {
@@ -322,7 +322,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Fredlin hoist lifts your rooftop tent onto and off the vehicle by yourself, then stores it against the garage roof. The answer for everyone who camps hard but hates the weekly tent wrestle.',
     features: ['One-person tent loading', 'Garage roof storage', 'Part of our carried brand lineup', 'Quoted on request'],
-    image: '/images/products/tiles/tile-fredlin-hoists.webp',
+    image: '/images/products/fredlin-rtt-hoist.webp',
     inStock: true,
   },
   {
@@ -344,7 +344,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Wildog rear bumpers with spare wheel carriers take the weight of a full-size spare and a jerry can pair off your tailgate and put it on the chassis where it belongs. Quoted per vehicle with fitment included.',
     features: ['Chassis-mounted wheel carrier', 'Jerry can and recovery points', 'Matched to Wildog front bumpers', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-wildog.webp',
+    image: '/images/products/wildog-rear-bumper-carrier.webp',
     inStock: true,
   },
   {
@@ -355,7 +355,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Wildog side steps and underbody protection plates shield your sills and drivetrain from rocks, stumps and urban parking. Quoted as a set for your vehicle with brackets and fitment included.',
     features: ['CNC-cut steel construction', 'Sill and drivetrain protection', 'Vehicle-specific brackets', 'Quoted as a fitted set'],
-    image: '/images/products/tiles/tile-wildog.webp',
+    image: '/images/products/wildog-side-steps.webp',
     inStock: true,
   },
   {
@@ -399,7 +399,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Onca side steps and rock sliders in matching Toyota-spec steel: a clean step for daily use, real protection on the trail. Quoted per model to match their bumper range.',
     features: ['Matching Toyota-spec steel', 'Step plus slider protection', 'Model-specific brackets', 'Quoted per application'],
-    image: '/images/products/tiles/tile-onca-offroad.webp',
+    image: '/images/products/onca-side-steps-rails.webp',
     inStock: true,
   },
   {
@@ -421,7 +421,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Piak bumpers come to us through Opposite Lock Africa: stout steel front bars with winch options for the popular bakkie and SUV lines. Ask us for the Piak application list for your vehicle.',
     features: ['Supplied via Opposite Lock Africa', 'Winch provision options', 'Popular bakkie and SUV applications', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-piak.webp',
+    image: '/images/products/piak-front-bumper.webp',
     inStock: true,
   },
   {
@@ -432,7 +432,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Summit 4x4 front and rear bars, including applications for the latest Hilux generation: full replacement steel with winch provision and recovery points. Quoted per vehicle with fitment at our workshop.',
     features: ['Covers current model applications', 'Winch provision', 'Recovery points', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-summit-4x4.webp',
+    image: '/images/products/summit-front-bumper.webp',
     inStock: true,
   },
   {
@@ -454,7 +454,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Africa Longhorn builds bumpers and armour specifically for the Jeep Wrangler JK and JL and the Gladiator JT, plus GWM P-Series applications. Quoted for your Jeep with fitment at Weca.',
     features: ['Jeep JK, JL and Gladiator JT range', 'GWM P-Series applications', 'Steel bumpers and armour', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-africa-longhorn.webp',
+    image: '/images/products/africa-longhorn-jeep-armour.webp',
     inStock: true,
   },
   {
@@ -487,7 +487,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'A D.A.G snorkel lifts your engine air intake to roof height for dust and water crossings, model-matched to your vehicle. Quoted with templates, hardware and fitment included.',
     features: ['Raises air intake to roof height', 'Model-specific fitment', 'UV-stable plastic', 'Quoted with fitment included'],
-    image: '/images/products/tiles/tile-d-a-g.webp',
+    image: '/images/products/dag-snorkel.webp',
     inStock: true,
   },
   {
@@ -531,7 +531,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The Fox 2.5 Factory Race Series is the serious upgrade: larger bodies, more oil capacity and damping control for fast gravel, heavy builds and dune work. Quoted per application through Ride Fox Africa.',
     features: ['Fox 2.5 Factory Race Series', 'Larger body and oil capacity', 'For fast gravel and heavy builds', 'Quoted per application'],
-    image: '/images/products/tiles/tile-fox.webp',
+    image: '/images/products/fox-25-factory-race-shock.webp',
     inStock: true,
   },
   {
@@ -564,7 +564,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'AmadaXtreme builds rally-grade suspension for drivers who ask more of their vehicle than a touring kit should give. Tell us the vehicle, the load and the terrain and we will quote the right spec.',
     features: ['Rally-grade components', 'Built for hard, fast terrain', 'Speced to vehicle and load', 'Quoted per application'],
-    image: '/images/products/tiles/tile-amadaxtreme.webp',
+    image: '/images/products/amadaxtreme-rally-kit.webp',
     inStock: true,
   },
   {
@@ -597,7 +597,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Lightforce LED driving lights, supplied through Opposite Lock Africa: serious reach for Namibian night driving, in the tough hydrophobic housings the brand is known for. Quoted with wiring looms and fitment.',
     features: ['Long-range LED driving lights', 'Supplied via Opposite Lock Africa', 'Tough housings for African conditions', 'Quoted with wiring and fitment'],
-    image: '/images/products/tiles/tile-lightforce.webp',
+    image: '/images/products/lightforce-driving-lights.webp',
     inStock: true,
   },
   {
@@ -608,7 +608,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'D.A.G LED light bars from the 4x4 Wholesalers Africa line: single and dual row bars in the popular sizes, sharp value for work and play. Quoted with brackets, wiring and fitment at Weca.',
     features: ['Single and dual row bars', 'Popular sizes in stock flow', 'Sharp value lighting', 'Quoted with wiring and fitment'],
-    image: '/images/products/tiles/tile-d-a-g.webp',
+    image: '/images/products/dag-led-light-bars.webp',
     inStock: true,
   },
   {
@@ -663,7 +663,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'The D.A.G camping fridge line from 4x4 Wholesalers Africa covers the popular capacities at a value price point, a strong match for a slide and dual battery setup. Quoted per model.',
     features: ['Value-focused camping fridges', 'Popular capacities', 'Pairs with our slide systems', 'Quoted per model'],
-    image: '/images/products/tiles/tile-d-a-g.webp',
+    image: '/images/products/dag-camping-fridge.webp',
     inStock: true,
   },
   {
@@ -674,7 +674,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Moremi camping trailers and custom campers, part of the brand lineup we carry: base camp capacity behind your 4x4 with tent, kitchen and storage built in. Talk to us about current builds and lead times.',
     features: ['Camping trailers and custom campers', 'Base camp capacity', 'Part of our carried brand lineup', 'Quoted on current builds'],
-    image: '/images/products/tiles/tile-moremi.webp',
+    image: '/images/products/moremi-camping-trailer.webp',
     inStock: true,
   },
   {
@@ -685,7 +685,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Tougher canvas seat covers are made for African work and play: heavy canvas, airbag-safe stitching and a fit per vehicle model. Quoted for your seats and fitted while you wait in most cases.',
     features: ['Heavy-duty canvas', 'Airbag-safe stitching', 'Vehicle-specific patterns', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-tougher.webp',
+    image: '/images/products/tougher-canvas-seat-covers.webp',
     inStock: true,
   },
   {
@@ -707,7 +707,7 @@ export const products: Product[] = [
     price: 'POA',
     description: 'Beesdam premium seat covers round out our seat cover lineup for owners who want a dressed-up cabin that still handles dirt and dogs. Quoted per vehicle model.',
     features: ['Premium finish options', 'Dust and pet friendly builds', 'Vehicle-specific fit', 'Quoted per vehicle'],
-    image: '/images/products/tiles/tile-beesdam.webp',
+    image: '/images/products/beesdam-seat-covers.webp',
     inStock: true,
   },
 ];

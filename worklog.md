@@ -227,3 +227,21 @@ Work Log:
 
 Stage Summary:
 - Repo is now tangison/weca-offroad; PR #7 intact (head 671951a -> new sha). Site still served by the same Vercel project at wecaoffroad.com. Nothing migrated; production content unchanged pending owner approval of PR #7.
+
+
+---
+Task ID: 5
+Agent: main (Super Z)
+Task: Owner instruction (2026-11-17): populate the shop with real product images from the net ("we have the right to do so"). Scrape official brand/distributor product images with Scrapling, process to 800px webp, wire into the catalog, nothing else changes.
+
+Work Log:
+- Inventory: 42 of 57 catalog products were on generic brand tiles; 15 already had dealer-sourced photos.
+- Sources: per-brand research (domain probes + web search) verified 28 official manufacturer/distributor domains; robots.txt fetched + parsed for all and archived in scripts/sources-map.json.
+- Crawl (Scrapling v0.5.1 official skill): Spider with robots_txt_obey=True + AutoThrottle + per-domain politeness; Shopify stores via public products.json/collections.json; sitemap-driven discovery for WordPress/Wix/other; listing-page detection for Howling Moon/Gobi-X/Moremi/Fredlin; stealth browser (Patchright chromium) used ONLY for Cloudflare-challenged sites (Furnlock, Moremi) - Tough Dog + Dometic WAFs blocked even the stealth browser and were respected (tiles kept); EFS robots/timeouts respected.
+- Matching: candidates scored against catalog names with curated per-product positive/negative keyword filters (rejected wrong-product matches: fuel tank for a bumper brand, floor mats for armour, STEDI lights for D.A.G, site logo for Gobi-X, price-flyer image for Ratel).
+- Result: 27 products upgraded to real product photos (800px webp q82, converted from jpg/png/avif, transparent PNGs kept RGBA); 15 products keep honest on-brand tiles with documented reasons.
+- Wired: data.ts image paths updated for the 27 products only; sourcing comment updated; catalog counts verified via bun (57 products / 42 real photos / 15 tiles / 0 missing files).
+- Proof: PROOF.md Part 5 with full per-product source table + robots audit + rights note.
+
+Stage Summary:
+- Shop catalog now shows real manufacturer product photos for 42 of 57 products; every image traceable to an official source page with robots compliance recorded. Gates re-run; nothing else changed.

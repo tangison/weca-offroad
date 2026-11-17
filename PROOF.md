@@ -245,3 +245,93 @@ Record of material actions taken during this build session.
 | Change | Tests now enforce the owner's catalog policy | `src/lib/__tests__/data.test.ts` | 200+ fabricated-count assertion replaced with 50+ real-catalog assertion; new assertions: every product price === 'POA' (hard-enforces the no-estimated-prices rule) and every product brand is inside the owner-approved brand allowlist (hard-enforces the no-brands-beyond-my-list rule). | 50/50 tests pass (24 data tests incl. new policy tests). | src/lib/__tests__/data.test.ts | 2026-10-14 | complete |
 | Verify | Full gate on the shop unlock change set | Whole project | bun run typecheck (0 errors), bun run lint (0 errors), bun run test (50/50), bun run build (19/19 routes, exit 0), next start on :3100 + agent-browser QA | Desktop 1366: shop grid + filters + dialog + THE BAR + sticky bar + home widgets + FABs verified. Mobile iPhone 14: 2-col grid, THE BAR, sticky strip verified. Console: 1 pre-existing shadcn DialogContent aria-describedby warning only, no errors. | terminal + /home/z/my-project/scripts/verify-*.png (11 screenshots) | 2026-10-14 | complete |
 
+
+
+## Shop catalog product images - real photos from official brand sources (2026-11-17) - Part 5
+
+Owner instruction: "go and grab the images so that we populate the shop with real images from the net we have the right to do so". Weca Offroad Centre is a dealer/fitment centre for these brands; product photos were taken from the official manufacturer / authorized-distributor product pages only (no third-party retailer scraping, no personal data, no paywall/auth bypass). Tool: Scrapling v0.5.1 (official skill) - Spider framework with `robots_txt_obey = True`, AutoThrottle (start 1.5s, max 20s, backs off on blocks), `concurrent_requests_per_domain = 2`, `download_delay = 1.0`, Shopify JSON API endpoints for Shopify stores, sitemap-driven discovery otherwise, stealth browser (Patchright) only for Cloudflare-challenged domains. Every fetch was robots-checked; robots.txt text for every domain saved in `scripts/sources-map.json`.
+
+Rights & compliance note: images are used to advertise products Weca sells and fits (dealer use of manufacturer product imagery), per owner's assertion of rights; each image's exact source page is recorded below; downloads were rate-limited (1.2-2.0s jitter) and processing is resize/convert only (800px webp q82).
+
+| Domain robots audit | domain | robots.txt status | sitemaps listed |
+| --- | --- | --- | --- |
+| Africa Longhorn | africalonghorn.co.za | 200 | 1 sitemap(s) |
+| AluBlack | alublack.com | 404 | 0 sitemap(s) |
+| AmadaXtreme | amadaxtreme.co.za | 200 | 1 sitemap(s) |
+| Beesdam | beesdam.co.za | 200 | 1 sitemap(s) |
+| D.A.G | 4x4wholesalersafrica.com | 200 | 1 sitemap(s) |
+| Dometic | dometic.com | 200 | 1 sitemap(s) |
+| EFS | efs4wd.com.au | error: Timeout | 0 sitemap(s) |
+| EcoFlow | ecoflow.com | 200 | 1 sitemap(s) |
+| Fox | ridefox.com | 200 | 1 sitemap(s) |
+| Fredlin Hoists | fredlin.co.za | 404 | 0 sitemap(s) |
+| Furnlock & Slide | furnlock.co.za | 200 | 0 sitemap(s) |
+| Gobi-X | gobi-x.co.za | 200 | 1 sitemap(s) |
+| Howling Moon | howlingmoon.co.za | 200 | 0 sitemap(s) |
+| Induna 4x4 | induna4x4.co.za | 200 | 1 sitemap(s) |
+| Lightforce | lightforce.com.au | 200 | 1 sitemap(s) |
+| MCC | mcc4x4.com.au | 200 | 5 sitemap(s) |
+| Moremi | moremitrailers.co.za | 200 | 0 sitemap(s) |
+| Onca Offroad | onca4x4.co.za | 200 | 1 sitemap(s) |
+| Piak | piakoffroad.com.au | 200 | 1 sitemap(s) |
+| Profender | profender4x4.com | 200 | 2 sitemap(s) |
+| Quick Pitch | quickpitchsa.com | 200 | 1 sitemap(s) |
+| Ratel | bosbumper.co.za | 200 | 1 sitemap(s) |
+| Rhinoman | rhinoman.co.za | 200 | 1 sitemap(s) |
+| Summit 4x4 | summit4x4.co.za | 200 | 1 sitemap(s) |
+| The 4x4 Store | the4x4store.co.za | 200 | 1 sitemap(s) |
+| Tough Dog | toughdog.com.au | 403 | 0 sitemap(s) |
+| Tougher | tougher.co.za | 200 | 1 sitemap(s) |
+| Wildog | wildog.co.za | 200 | 0 sitemap(s) |
+
+Blocked / unavailable sources (products keep their on-brand tile): Tough Dog + Dometic (WAF returns 403 to all automated access incl. stealth browser - respected), EFS (robots + connection timeouts), MAXE (official site offline), Eezi Slide + AluBlack (no live official site), plus the no-clean-match skips below.
+
+| Product | Brand | Source page (official) | robots.txt status | Image file |
+| --- | --- | --- | --- | --- |
+| Africa Longhorn Jeep JK/JL/JT Armour | Africa Longhorn | https://www.africalonghorn.co.za/product-page/poison-spyder-brawler-lite-front-skid | robots 200 (Wix; product og:image from official product pages) | `file.jpg` |
+| AmadaXtreme Rally Suspension Kit | AmadaXtreme | https://amadaxtreme.co.za/products/fortuner-50mm-suspension-kit-with-rear-air-helpers | robots 200 | `Fortuner_Kit_Air.jpg?v=1581055717` |
+| Beesdam Premium Seat Covers | Beesdam | https://beesdam.co.za/products/legacy-premium-seat-covers | robots 200 (Shopify storefront; product JSON explicitly crawlable) | `Beesdam-Seat-Covers-Charcoal-Canvas-Textured-Brown-Leather-5_1.png?v=1783499764` |
+| D.A.G 270 Degree Awning | D.A.G | https://4x4wholesalersafrica.com/products/d-a-g-270-degree-buffalo-wing-awning | robots 200 (distributor 4x4wholesalersafrica.com, Shopify JSON crawlable) | `WebsiteImages_95.jpg?v=1770812287` |
+| D.A.G Camping Fridge | D.A.G | https://4x4wholesalersafrica.com/products/d-a-g-nl40-fridge | robots 200 (distributor 4x4wholesalersafrica.com, Shopify JSON crawlable) | `4_eb4f89b1-c377-4b8f-9e79-46045d24d673.jpg?v=1719837568` |
+| D.A.G LED Light Bars | D.A.G | https://4x4wholesalersafrica.com/products/d-a-g-7-90w-led-spotlight-set | robots 200 (distributor 4x4wholesalersafrica.com, Shopify JSON crawlable) | `11.jpg?v=1674115015` |
+| D.A.G Rooftop Tent | D.A.G | https://4x4wholesalersafrica.com/products/d-a-g-wolfpack-roof-top-tent | robots 200 (distributor 4x4wholesalersafrica.com, Shopify JSON crawlable) | `WebsiteImages_10.jpg?v=1699365309` |
+| D.A.G 4x4 Snorkel | D.A.G | https://4x4wholesalersafrica.com/products/d-a-g-tech-flow-snorkel-jimny | robots 200 (distributor 4x4wholesalersafrica.com, Shopify JSON crawlable) | `IMG_1175.jpg?v=1754652856` |
+| Fox 2.5 Factory Race Series Shock | Fox | https://ridefox.com/products/ford-f-150-2-5-factory-race-series-822452c4 | robots 200 | `FOX_TRUCK_25_FACTORY_SMOOTH_BODY_RESERVOIR_1600x1600_cbacbc0c-74f1-48de-b3f5-d58de632b0ec.png?v=1775671469` |
+| Fredlin Rooftop Tent Hoist | Fredlin Hoists | https://fredlin.co.za/hoistProducts.php | robots 404 (no robots.txt = unrestricted crawl) | `hoist_rooftop_tent.png` |
+| Furnlock Heavy-Duty Fridge Slide | Furnlock & Slide | https://www.furnlock.co.za/product/heavy-duty-slide-model-7330/ | robots 200; Cloudflare challenge solved via stealth browser (Scrapling solve_cloudflare) | `7330-HEAVY-DUTY-90KG.png` |
+| Howling Moon Side Awning | Howling Moon | https://www.howlingmoon.co.za/awnings/safari-awning | robots 200 | `972639 to 972648-600x450.jpg` |
+| Howling Moon Deluxe Rooftop Tent | Howling Moon | https://www.howlingmoon.co.za/tents/softshell-rooftop-tents/h-m-1-4-stargazer-delux-new-gen | robots 200 | `IMG-20251029-WA0071-600x450.jpg` |
+| Howling Moon Stargazer Rooftop Tent | Howling Moon | https://www.howlingmoon.co.za/tents/softshell-rooftop-tents/stargazer-tourer-rooftop-tent | robots 200 | `STARGAZER TOURER 1.4 - 1-600x450.jpg` |
+| Induna LC70 Series Roof Console | Induna 4x4 | https://induna4x4.co.za/product/land-cruiser-76-79-t-shape-roof-console-2012-2024/ | robots 200 | `4325893365.png` |
+| Lightforce LED Driving Lights | Lightforce | https://lightforce.com.au/products/genesis-e-mark-edition-led-driving-light | robots 200 | `genesis-e-mark-edition-led-driving-light-lightforce-genesisled210e-37069996753045_1.png?v=1787029916` |
+| Moremi Camping Trailer | Moremi | https://www.moremitrailers.co.za/bigfoot-custom-camper/ | robots 200; site behind Cloudflare challenge, solved via stealth browser fetch | `IMG_20250915_093608-scaled.avif` |
+| Onca Offroad Side Steps & Rails | Onca Offroad | https://onca4x4.co.za/product/heavy-duty-side-steps-jimny/ | robots 200 | `20240927_164234-Medium.jpg` |
+| Piak Front Bumper | Piak | https://piakoffroad.com.au/products/genesis-loop-bull-bar-black-recovery-point-grey-radiator-plate-to-suit-ford-ranger-py-3-2022-on-everest-6-2022-on-pkglfdr22bg | robots 200 | `PKGLFDR22BG-1791171992-0.jpg?v=1791172040` |
+| Quick Pitch 270 Degree Freestanding Awning | Quick Pitch | https://www.quickpitchsa.com/weather-awnings | robots 200 (Webflow; images from official product page) | `663de2e890c2b6b6088c797e_20%20Sec%20Awning%202.jpg` |
+| Rhinoman LT Canopy | Rhinoman | https://rhinoman.co.za/product/kia-tasman-double-cab-lt-canopy-all-black/ | robots 200 (WordPress; product pages + og:image) | `KIA-Tasman-DC-LX-Black.jpg` |
+| Rhinoman LX Canopy | Rhinoman | https://rhinoman.co.za/product/mahindra-pik-up-dc-lx-canopy/ | robots 200 (WordPress; product pages + og:image) | `Mahindra-DC-LX-Black.jpg` |
+| Rhinoman Xpedition Canopy | Rhinoman | https://rhinoman.co.za/product/p-series-dc-xpedition/ | robots 200 (WordPress; product pages + og:image) | `2-1.jpg` |
+| Summit 4x4 Front Bumper | Summit 4x4 | https://summit4x4.co.za/product/isuzu-kb7-d-max-2022-onwards-bzt-x-series-front-bumper/ | robots 200 | `D-Max-BZT-4.jpg` |
+| Tougher Canvas Seat Covers | Tougher | https://tougher.co.za/product/toyota-rav4-seat-cover/ | robots 200 | `Tougher-Seat-cover-1.jpg` |
+| Wildog Rear Bumper & Wheel Carrier | Wildog | https://wildog.co.za//products/toyota/hilux/hilux-legend-2021/legend-revo-spare-wheel-carrier-rear/ | robots 200 | `wildog_549.webp` |
+| Wildog Side Steps & Protection Plates | Wildog | https://wildog.co.za/products/tag/rock-sliders | robots 200 | `wildog_509.webp` |
+
+| Products kept on on-brand tile | Reason |
+| --- | --- |
+| Howling Moon Lunar Rooftop Tent | no candidate passed the curated filters |
+| AluBlack Aluminium Canopy | no verified source (site down / WAF-blocked / robots / placeholder) |
+| MAXE Stainless Steel Roller Lid | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Eezi Slide Drawer System | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Gobi-X Dual Swing Rear Carrier | no candidate passed the curated filters |
+| MCC Front Winch Bar | no candidate passed the curated filters |
+| MAXE Stainless Steel Front Bumper | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Africa Longhorn GWM P-Series Armour | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Tough Dog Adjustable Shock Range | no verified source (site down / WAF-blocked / robots / placeholder) |
+| EFS Suspension Kit | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Profender Suspension Kit | no candidate passed the curated filters |
+| EcoFlow RIVER Power Station | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Dual Battery System | no candidate passed the curated filters |
+| Dometic Fridge-Freezer | no verified source (site down / WAF-blocked / robots / placeholder) |
+| Ratel Bosbumper | bosbumper.co.za carries rear bumpers/tanks only; front BOSSbumper photo not available cleanly |
+
+Evidence: staging + contact sheet `scripts/staging/*.webp`, `scripts/contact-sheet.jpg`; selection with curated per-product filters `scripts/selection.json`; crawl manifests `scripts/crawl-manifest*.json`; scrapling dev cache `/tmp/scrap_cache` (all fetched pages). data.ts image paths updated for the 27 upgraded products only; 15 tiles remain for the brands above; tests/gates re-run this session.
